@@ -74,7 +74,7 @@ body > nav > :not(:first-child):is(:hover, :focus, [current])::after {
 body > header {
   position: relative;
   display: flex;
-  height: calc(50vh - 5rem);
+  height: calc(65vh - 5rem);
   align-items: center;
   justify-content: center;
 }
