@@ -24,7 +24,7 @@
 <body>
 
 <nav {{ if .Site.Params.fixedNavBar }} fixed {{ end }}>
-	<a href="/">{{ .Site.Title }}</a>
+	<a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
 
 	{{ $currentPage := . }}
 	{{ range .Site.Menus.main.ByWeight }}
