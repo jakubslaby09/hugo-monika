@@ -138,7 +138,7 @@ body > main a:hover {
 body > main img {
   width: 100%;
   object-fit: contain;
-  max-height: 50vh;
+  max-height: 100vh;
 }
 @media screen and (min-width: 100ch) {
   body > main p:is(:has(img):has(+ blockquote), [before-blockquote-has-img]) {
