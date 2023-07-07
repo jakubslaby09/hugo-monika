@@ -37,7 +37,7 @@
 		{{ if .Params.image }}
 			{{ $image := resources.GetMatch .Params.image }}
 			{{ if $image }}
-				{{ $image := $image.Resize "1920x" }}
+				{{ $image := $image.Resize "1920x webp" }}
 				<img
 					src="{{ $image.Permalink }}"
 					style="--y-position: {{ .Params.imagePosition }}%;">
