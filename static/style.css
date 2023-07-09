@@ -111,6 +111,9 @@ body > main :is(h1, h2, h3, h4, h5, h6) {
   margin-bottom: 1em;
   font-weight: 700;
 }
+body > main > :is(h1, h2, h3, h4, h5, h6) > a {
+  color: inherit;
+}
 body > main > :is(h1, h2, h3, h4, h5, h6) > em {
   font-size: 0.8em;
 }
@@ -125,12 +128,11 @@ body > main > h1 {
 body > main > h1:first-child {
   margin: 1em 0;
 }
-body > main p a {
+body > main a {
   transition: 200ms;
   color: #444;
   text-decoration: none;
-  border: 0 solid #4448;
-  border-bottom-width: 1px;
+  border-bottom: 1px solid #4448;
 }
 body > main a:hover {
   border-color: #444;
@@ -208,6 +210,10 @@ body > main .gallery {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+body > main .gallery > a {
+  border-bottom: none;
+  line-height: 0;
 }
 body > main .gallery img {
   aspect-ratio: 1 / 1;
