@@ -3,7 +3,8 @@
     {{ range (readDir (printf "assets/%s" $dir)) }}
         {{ with resources.Get (printf "%s%s" $dir .Name) }}
             {{ $preview := .Resize "x480 webp" }}
-            <a href="#{{ .Name }}" id="{{ .Name }}">
+            {{ $id := replace .Name "/" "-" }}
+            <a href="#{{ $id }}" id="{{ $id }}">
                 <img
                     src="{{ $preview.Permalink }}"
                     loading="lazy"
