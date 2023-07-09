@@ -213,6 +213,111 @@ body > main .gallery img {
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
+body:is(:has(.gallery > a:target), [has-open-gallery]) {
+  overflow: hidden;
+}
+body > main .gallery:is(:has(> a:target), [has-target]) {
+  display: flex;
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: #000;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  z-index: 1;
+  animation: gallery-open 300ms linear forwards;
+}
+@keyframes gallery-open {
+  from {
+    opacity: 0;
+  }
+  to {
+    scroll-behavior: smooth;
+  }
+}
+body > main .gallery:is(:has(> a:target), [has-target]) > a:not(.close) {
+  position: relative;
+  scroll-snap-align: center;
+  -webkit-tap-highlight-color: transparent;
+  animation: gallery-open-a 300ms;
+}
+@keyframes gallery-open-a {
+  from {
+    transform: scale(0.7);
+  }
+}
+body > main .gallery:is(:has(> a:target), [has-target]) > a:not(.close)::before {
+  /* content: "🡪"; */
+  content: "▶";
+  position: absolute;
+  inset: 50vh auto auto -6rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  border-radius: 50%;
+  background-color: #4448;
+  color: #fff;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.2rem;
+  z-index: 1;
+  animation: gallery-open-arrows 300ms;
+}
+body > main .gallery:is(:has(> a:target), [has-target]) > a:not(.close)::after {
+  /* content: "🡨"; */
+  content: "◀";
+  position: absolute;
+  inset: 50vh -6rem auto auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  border-radius: 50%;
+  background-color: #4448;
+  color: #fff;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.2rem;
+  z-index: 1;
+  animation: gallery-open-arrows 300ms;
+}
+@keyframes gallery-open-arrows {
+  from, 50% {
+    opacity: 0;
+  }
+}
+body > main .gallery:is(:has(> a:target), [has-target]) > a:nth-last-child(2)::after {
+  content: unset;
+}
+body > main .gallery > a:not(.close):target {
+  pointer-events: none;
+}
+body > main .gallery:is(:has(> a:target), [has-target]) img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  content: var(--full-url);
+}
+body > main .gallery > a.close {
+  display: none;
+}
+body > main .gallery:is(:has(> a:target), [has-target]) > a.close {
+  display: unset;
+  position: fixed;
+  inset: 1.5rem auto auto 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-family: monospace;
+  font-size: 1.2rem;
+  z-index: 1;
+}
+body > main .gallery:is(:has(> a:target), [has-target]) > a.close:hover {
+  background-color: #4448;
+}
 
 body > main .page {
   transition: border 200ms;

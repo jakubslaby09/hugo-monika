@@ -1,12 +1,15 @@
 <section class="gallery">
-    <!-- <img src="" alt=""> -->
     {{ $dir := .Get 0 }}
     {{ range (readDir (printf "assets/%s" $dir)) }}
         {{ with resources.Get (printf "%s%s" $dir .Name) }}
-            {{ $preview := .Resize "x480" }}
-            <a href="{{ .Permalink }}">
-                <img src="{{ $preview.Permalink }}">
+            {{ $preview := .Resize "x480 webp" }}
+            <a href="#{{ .Name }}" id="{{ .Name }}">
+                <img
+                    src="{{ $preview.Permalink }}"
+                    loading="lazy"
+                    style="--full-url: url({{ .Permalink | safeCSS }})">
             </a>
         {{ end }}
     {{ end }}
+    <a class="close" href="#">✕</a>
 </section>
