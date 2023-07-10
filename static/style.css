@@ -207,17 +207,19 @@ body > footer > img {
 }
 
 body > main .gallery {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
 body > main .gallery > a {
-  border-bottom: none;
-  line-height: 0;
+  flex-grow: 1;
+  height: clamp(15rem, 40rem - 60vw, 40vh);
 }
-body > main .gallery img {
-  aspect-ratio: 1 / 1;
+body > main .gallery > a > img {
+  /* aspect-ratio: 1 / 1; */
   object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 body:is(:has(.gallery > a:target), [has-open-gallery]) {
   overflow: hidden;
@@ -226,6 +228,7 @@ body > main .gallery:is(:has(> a:target), [has-target]) {
   display: flex;
   position: fixed;
   inset: 0 0 0 0;
+  flex-wrap: unset;
   background-color: #000;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -243,6 +246,7 @@ body > main .gallery:is(:has(> a:target), [has-target]) {
 }
 body > main .gallery:is(:has(> a:target), [has-target]) > a:not(.close) {
   position: relative;
+  height: unset;
   scroll-snap-align: center;
   -webkit-tap-highlight-color: transparent;
   animation: gallery-open-a 300ms;
