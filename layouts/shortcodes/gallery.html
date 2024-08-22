@@ -1,6 +1,6 @@
 <section class="gallery">
     {{ $dir := .Get 0 }}
-    {{ range (readDir (printf "assets/%s" $dir)) }}
+    {{ range (sort (readDir (printf "assets/%s" $dir)) "Name" "desc") }}
         {{ with resources.Get (printf "%s%s" $dir .Name) }}
             {{ $preview := .Resize "x480 webp" }}
             {{ $id := replace .Name "/" "-" }}
