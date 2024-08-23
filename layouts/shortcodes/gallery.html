@@ -1,14 +1,14 @@
 <section class="gallery">
     {{ $dir := .Get 0 }}
+    {{ $autoorient := images.AutoOrient }}
     {{ range (sort (readDir (printf "assets/%s" $dir)) "Name" "asc") }}
-        {{ with resources.Get (printf "%s%s" $dir .Name) }}
-            {{ $preview := .Resize "x480 webp" }}
+        {{ with (resources.Get (printf "%s%s" $dir .Name)) | images.Filter $autoorient }}
             {{ $id := replace .Name "/" "-" }}
             <a href="#{{ $id }}" id="{{ $id }}">
                 <img
-                    src="{{ $preview.Permalink }}"
+                    src="{{ (.Resize `x480 webp q80`).Permalink }}"
                     loading="lazy"
-                    style="--full-url: url({{ .Permalink | safeCSS }})">
+                    style="--full-url: url({{ (.Resize `x1080 webp`).Permalink | safeCSS }})">
             </a>
         {{ end }}
     {{ end }}

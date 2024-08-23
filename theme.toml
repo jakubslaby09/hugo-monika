@@ -1,0 +1,6 @@
+name = "Monika"
+license = "MIT"
+min_version = "0.121.2"
+
+[author]
+  name = "Jakub Slabý"
