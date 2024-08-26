@@ -274,6 +274,7 @@ body > main .gallery .full > a:not(.close) {
   flex: 100vw 0 0;
   height: 100vh;
   scroll-snap-align: center;
+  -webkit-tap-highlight-color: transparent;
 }
 body > main .gallery .full > a:not(.close):target {
   pointer-events: none;
