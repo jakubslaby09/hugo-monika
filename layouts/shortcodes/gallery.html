@@ -1,16 +1,29 @@
 <section class="gallery">
     {{ $dir := .Get 0 }}
     {{ $autoorient := images.AutoOrient }}
-    {{ range (sort (readDir (printf "assets/%s" $dir)) "Name" "asc") }}
+    {{ $resources := sort (readDir (printf "assets/%s" $dir)) "Name" "asc" }}
+    <div class="full">
+        {{ range $resources }}
+            {{ with (resources.Get (printf "%s%s" $dir .Name)) | images.Filter $autoorient }}
+                {{ $id := replace .Name "/" "-" }}
+                <a class="close" href="#preview-{{ $id }}"></a>
+                <a id="{{ $id }}" href="#{{ $id }}">
+                    <img
+                        src="{{ (.Resize `x1080 webp`).Permalink }}"
+                        style="--temp: url({{ (.Resize `x480 webp q80`).Permalink | safeCSS }})"
+                        loading="lazy" width="{{ .Width }}" height="{{ .Height }}">
+                </a>
+            {{ end }}
+        {{ end }}
+    </div>
+    {{ range $resources }}
         {{ with (resources.Get (printf "%s%s" $dir .Name)) | images.Filter $autoorient }}
             {{ $id := replace .Name "/" "-" }}
-            <a href="#{{ $id }}" id="{{ $id }}">
+            <a href="#{{ $id }}" id="preview-{{ $id }}">
                 <img
                     src="{{ (.Resize `x480 webp q80`).Permalink }}"
-                    loading="lazy"
-                    style="--full-url: url({{ (.Resize `x1080 webp`).Permalink | safeCSS }})">
+                    loading="lazy" width="{{ .Width }}" height="{{ .Height }}">
             </a>
         {{ end }}
     {{ end }}
-    <a class="close" href="#">✕</a>
 </section>
