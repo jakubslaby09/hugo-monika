@@ -211,6 +211,7 @@ body > main .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  overflow: hidden;
 }
 body > main .gallery > a {
   flex-grow: 1;
